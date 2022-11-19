@@ -48,6 +48,7 @@
 ## 게임 실행 예시
 
 **1.시작 화면**
+![시작화면](https://github.com/kny0716/snowballfinght/edit/main/image/startscreen)
 
 
 
