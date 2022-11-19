@@ -212,8 +212,8 @@ def stat():
     p2_speed = 1 # player2의 기본 이동 속도
     snowmax_1 = 0 # player1의 기본 눈 최대 개수
     snowmax_2 = 0 # player2의 기본 눈 최대 개수
-    snspeed_1 = 5 # player1의 기본 눈 속도
-    snspeed_2 = 5 # player2의 기본 눈 속도 
+    snspeed_1 = 8 # player1의 기본 눈 속력
+    snspeed_2 = 8 # player2의 기본 눈 속력
 
     # 스텟 분배량
     stat_speed1 = 0
@@ -263,12 +263,12 @@ def stat():
                     if stat_snowmax1 > 0 and stat1 < 10 :
                         stat_snowmax1 = stat_snowmax1 - 1
                         stat1 = stat1 + 1
-                # player1의 눈 속도 스텟 증가 버튼 클릭 
+                # player1의 눈 속력 스텟 증가 버튼 클릭 
                 if (btup1_xy[2][0] + bt_width > mouse[0]) and (mouse[0] >btup1_xy[2][0] ) and (btup1_xy[2][1] + bt_height > mouse[1] ) and (mouse[1] > btup1_xy[2][1]):
                     if stat_snspeed1 < 10 and stat1 > 0:
                         stat_snspeed1 = stat_snspeed1 + 1
                         stat1 = stat1 - 1
-                # player1의 눈 속도 스텟 감소 버튼 클릭 
+                # player1의 눈 속력 스텟 감소 버튼 클릭 
                 if (btdown1_xy[2][0] + bt_width > mouse[0]) and (mouse[0] >btdown1_xy[2][0] ) and (btdown1_xy[2][1] + bt_height > mouse[1] ) and (mouse[1] > btdown1_xy[2][1]):
                     if stat_snspeed1 > 0 and stat1 < 10:
                         stat_snspeed1 = stat_snspeed1 - 1
@@ -294,20 +294,20 @@ def stat():
                     if stat_snowmax2 > 0 and stat2 < 10:
                         stat_snowmax2 = stat_snowmax2 - 1
                         stat2 = stat2 + 1
-                # player2의 눈 속도 스텟 증가 버튼 클릭 
+                # player2의 눈 속력 스텟 증가 버튼 클릭 
                 if (btup2_xy[2][0] + bt_width > mouse[0]) and (mouse[0] >btup2_xy[2][0] ) and (btup2_xy[2][1] + bt_height > mouse[1] ) and (mouse[1] > btup2_xy[2][1]):
                     if stat_snspeed2 < 10 and stat2 > 0:
                         stat_snspeed2 = stat_snspeed2 + 1
                         stat2 = stat2 - 1
-                # player2의 눈 속도 스텟 감소 버튼 클릭 
+                # player2의 눈 속력 스텟 감소 버튼 클릭 
                 if (btdown2_xy[2][0] + bt_width > mouse[0]) and (mouse[0] >btdown2_xy[2][0] ) and (btdown2_xy[2][1] + bt_height > mouse[1] ) and (mouse[1] > btdown2_xy[2][1]):
                     if stat_snspeed2 > 0 and stat2 < 10:
                         stat_snspeed2 = stat_snspeed2 - 1
                         stat2 = stat2 + 1
                 # 게임 시작 버튼 클릭
                 if (btst_xy[0] + btst_width > mouse[0]) and (mouse[0] >btst_xy[0] ) and (btst_xy[1] + bt_height > mouse[1] ) and (mouse[1] > btst_xy[1]):
-                    p1_speed = p1_speed + stat_speed1
-                    p2_speed = p2_speed + stat_speed2
+                    p1_speed = p1_speed + 0.5 * stat_speed1
+                    p2_speed = p2_speed + 0.5 * stat_speed2
                     snowmax_1 = snowmax_1 + stat_snowmax1
                     snowmax_2 = snowmax_2 + stat_snowmax2 
                     snspeed_1 = snspeed_1 + stat_snspeed1
@@ -398,6 +398,9 @@ def runGame():
     y1_change = 0
     y2_change = 0
 
+    p1_maxspeed = p1_speed
+    p2_maxspeed = p2_speed
+
     while running:
         clock.tick(60)
         screen.fill(white)
@@ -430,7 +433,6 @@ def runGame():
                         x_s = x1 + 30
                         y_s = y1 + 25
                         sb1_xy.append([x_s,y_s])
-                        print(sb1_xy)
                 elif event.key == pygame.K_RCTRL:
                     if len(sb2_xy) <= snowmax_2: # player2의 눈 던지기
                         x_s = x2 + 30
@@ -446,11 +448,11 @@ def runGame():
                         elif p1_item[0] == i_shield : # 사용한 아이템이 방패일때 방패 생성
                             p1_shield = True
                         elif p1_item[0] == i_poison: # 사용한 아이템이 독일때 player2의 속도 낮춤 
-                            if p2_speed == 10:
-                                p2_speed = p2_speed - 5
+                            if p2_speed <= p2_maxspeed and p2_speed - 1 > 0 :
+                                p2_speed = p2_speed - 1
                         else : # 사용한 아이템이 회복약일때 player1의 속도 회복
-                            if p1_speed == 5:
-                                p1_speed = p1_speed + 5       
+                            if p1_speed + 1 <= p1_maxspeed:
+                                p1_speed = p1_speed + 1       
                         p1_item.remove(p1_item[0]) # 사용한 아이템 삭제
 
                 elif event.key == pygame.K_RSHIFT: # player2의 아이템 사용
@@ -462,11 +464,11 @@ def runGame():
                         elif p2_item[0] == i_shield : # 사용한 아이템이 방패일때 방패 생성
                             p2_shield = True
                         elif p2_item[0] == i_poison: # 사용한 아이템이 독일때 player1의 속도 낮춤 
-                            if p1_speed == 10:
-                                p1_speed = p1_speed - 5
+                            if p1_speed <= p1_maxspeed and p1_speed - 1 > 0:
+                                p1_speed = p1_speed - 1
                         else : # 사용한 아이템이 회복약일때 player2의 속도 회복
-                            if p2_speed == 5:
-                                p2_speed = p2_speed + 5       
+                            if p2_speed + 1 <= p2_maxspeed:
+                                p2_speed = p2_speed + 1      
                         p2_item.remove(p2_item[0])
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_w or event.key == pygame.K_s:
@@ -599,4 +601,3 @@ def runGame():
         pygame.quit()
 
 StartScreen() # 시작 화면
-    
