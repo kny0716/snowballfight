@@ -53,7 +53,7 @@
 > 시작 화면에서 게임 시작을 누르면 스탯 분배 화면으로 전환되고, 게임 설명을 누르면 게임 설명 화면으로 전환됩니다.
 
 
-![게임설명](image/explanation.png)
+![게임설명](image/explanationscreen.png)
 > 게임 설명 화면에서 게임 시작을 누르면 게임이 시작됩니다.
  
 ![스텟분배](image/statscreen.png)
