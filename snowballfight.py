@@ -1,16 +1,3 @@
-# [게임 목표]
-# 1. player는 위,아래로 이동가능 ㅇ 11/07
-# 2. 각각 ctrl를 누르면 눈이 날라감 ㅇ 11/08
-# 3. 눈이 상대방에게 맞으면 모양이 바뀐 후 사라짐 o 11/08 가능하면 효과음도 넣고 싶음
-# 4. 눈에 맞으면 체력이 깎임 가능하면 약간 멈추게 하고 싶음 (x), 체력은 아래 표시 o 11/09
-# 5. 아이템은 눈을 맞춰 얻음, 아이템은 특정 시간이 지났을 때 생성 , 얻은 아이템은 체력 위에 표시 , 아이템은 3개까지만 가질 수 있음 11/10 o
-# 6. 아이템은 각 shift키를 눌러 사용 가능 (하트-체력 1 회복, 방어-방어막 생성, 독약-상대방의 속도 느려짐 회복약-속도 회복) 11/11 o
-# 7. 체력이 0이 되면 게임 종료 o 11/09
-# 8. 게임 시작전에 게임 화면을 만들고 싶음 (설명, 게임시작 버튼) 11/12 o
-# 9. 게임이 종료되면 player1 win! , player2 win! 메세지 화면에 띄우기 11/12 o
-# 10. 캐릭터 스탯 분배 (이동속도,던질 수 있는 눈 개수, 눈 속도) 11/19 o 
-# 오류 : 캐릭터가 화면밖으로 나감!
-
 import pygame
 import numpy as np
 import random
@@ -35,58 +22,58 @@ game_result = "game over"  # 게임 종료 메시지
 
 
 
-player_1 = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/player1.png")
+player_1 = pygame.image.load("image/player1.png")
 player_1 = pygame.transform.scale(player_1, (60, 70))
 
-player_2 = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/player2.png")
+player_2 = pygame.image.load("image/player2.png")
 player_2 = pygame.transform.scale(player_2, (60, 70))
 
-snowball = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/snowball.png")
+snowball = pygame.image.load("image/snowball.png")
 snowball = pygame.transform.scale(snowball, (20, 20))
 
-snow = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/snow.png")
+snow = pygame.image.load("image/snow.png")
 snow = pygame.transform.scale(snow, (20, 20))
 
-heart = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/heart.png")
+heart = pygame.image.load("image/heart.png")
 heart = pygame.transform.scale(heart, (20, 20))
 
-i_heart = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/heart.png")
+i_heart = pygame.image.load("image/heart.png")
 i_heart = pygame.transform.scale(i_heart, (20, 20))
 
-i_shield = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/shield.png")
+i_shield = pygame.image.load("image/shield.png")
 i_shield = pygame.transform.scale(i_shield, (20, 20))
 
-i_poison = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/poison.png")
+i_poison = pygame.image.load("image/poison.png")
 i_poison = pygame.transform.scale(i_poison, (20, 20))
 
-i_medicine = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/medicine.png")
+i_medicine = pygame.image.load("image/medicine.png")
 i_medicine = pygame.transform.scale(i_medicine, (20, 20))
 
-shield = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/sshield.png")
+shield = pygame.image.load("image/sshield.png")
 
 
-title = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/title.png")
-explanation = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/explanation.png")
-explanation1 = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/explanation1.png")
-gamestart = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/gamestart.png")
-gamestart1 = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/gamestart1.png")
+title = pygame.image.load("image/title.png")
+explanation = pygame.image.load("image/explanation.png")
+explanation1 = pygame.image.load("image/explanation1.png")
+gamestart = pygame.image.load("image/gamestart.png")
+gamestart1 = pygame.image.load("image/gamestart1.png")
 gamestart1 = pygame.transform.scale(gamestart1,(200,80))
-ex_text = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/ex_text.png")
-winex = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/winex.png")
+ex_text = pygame.image.load("image/ex_text.png")
+winex = pygame.image.load("image/winex.png")
 
-btup = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/btup.png")
+btup = pygame.image.load("image/btup.png")
 btup = pygame.transform.scale(btup, (70, 40))
-btdown = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/btdown.png")
+btdown = pygame.image.load("image/btdown.png")
 btdown = pygame.transform.scale(btdown, (70, 40))
-p1_text = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/p1_text.png")
-p2_text = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/p2_text.png")
+p1_text = pygame.image.load("image/p1_text.png")
+p2_text = pygame.image.load("image/p2_text.png")
 p1_text = pygame.transform.scale(p1_text, (100, 40))
 p2_text = pygame.transform.scale(p2_text, (102, 42))
-stat_title = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/stat_title.png")
-speed = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/speed.png")
-snowmax = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/snowmax.png")
-snowspeed = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/snowspeed.png")
-stat_text = pygame.image.load("C:/Users/82107/OneDrive - 서울과학기술대학교/바탕 화면/오픈소스소프트웨어/image/stat.png")
+stat_title = pygame.image.load("image/stat_title.png")
+speed = pygame.image.load("image/speed.png")
+snowmax = pygame.image.load("image/snowmax.png")
+snowspeed = pygame.image.load("image/snowspeed.png")
+stat_text = pygame.image.load("image/stat.png")
 # 시작 화면 
 def StartScreen():    
 
@@ -96,7 +83,7 @@ def StartScreen():
 
     # 버튼
     bt_width = 200
-    bt_height = 50 
+    bt_height = 80 
     btst_xy = [screen_width/6, 2 * screen_height / 3 + 25]
     btex_xy = [3*screen_width/4 - 100, 2 * screen_height / 3 + 25]
 
@@ -305,7 +292,7 @@ def stat():
                         stat_snspeed2 = stat_snspeed2 - 1
                         stat2 = stat2 + 1
                 # 게임 시작 버튼 클릭
-                if (btst_xy[0] + btst_width > mouse[0]) and (mouse[0] >btst_xy[0] ) and (btst_xy[1] + bt_height > mouse[1] ) and (mouse[1] > btst_xy[1]):
+                if (btst_xy[0] + btst_width  > mouse[0]) and (mouse[0] > btst_xy[0] +100 ) and (btst_xy[1] + bt_height > mouse[1] ) and (mouse[1] > btst_xy[1]):
                     p1_speed = p1_speed + 0.5 * stat_speed1
                     p2_speed = p2_speed + 0.5 * stat_speed2
                     snowmax_1 = snowmax_1 + stat_snowmax1
@@ -348,7 +335,7 @@ def stat():
         screen.blit(snowmax,(390,118))
         screen.blit(stat_snsp1,(740,180))
         screen.blit(snowspeed,(690,118))
-        screen.blit(stat_stat1,(890,180))
+        screen.blit(stat_stat1,(900,180))
         screen.blit(stat_text,(850,120))
 
         screen.blit(stat_sp2,(200,380))
@@ -357,7 +344,7 @@ def stat():
         screen.blit(snowmax,(390,318))
         screen.blit(stat_snsp2,(740,380))
         screen.blit(snowspeed,(690,318))
-        screen.blit(stat_stat2,(890,380))
+        screen.blit(stat_stat2,(900,380))
         screen.blit(stat_text,(850,320))
 
         pygame.display.update()
@@ -416,17 +403,13 @@ def runGame():
         
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w: # player1의 이동
-                    if y1 >= 0: # player가 화면 바깥으로 벗어나지 않도록 하기 위함
-                        y1_change = y1_change - p1_speed
+                    y1_change = y1_change - p1_speed
                 elif event.key == pygame.K_s:
-                    if y1 <= 400:
-                        y1_change = y1_change + p1_speed
+                    y1_change = y1_change + p1_speed
                 elif event.key == pygame.K_UP: # player2의 이동
-                    if y2 >= 0: # player가 화면 바깥으로 벗어나지 않도록 하기 위함
-                        y2_change = y2_change - p2_speed
+                    y2_change = y2_change - p2_speed
                 elif event.key == pygame.K_DOWN:
-                    if y2 <= 400:
-                         y2_change = y2_change + p2_speed
+                    y2_change = y2_change + p2_speed
 
                 elif event.key == pygame.K_LCTRL: # player1의 눈 던지기
                     if len(sb1_xy) < snowmax_1:
@@ -478,7 +461,17 @@ def runGame():
                     y2_change = 0
        
         y1 += y1_change
-        y2 += y2_change   
+        y2 += y2_change 
+
+        if y1 <0 : # player1이 화면 바깥으로 나가지 못하게 함 
+            y1 = 0
+        elif y1 > 390 :
+            y1 = 390
+
+        if y2 <0 : # player2이 화면 바깥으로 나가지 못하게 함 
+            y2 = 0
+        elif y2 > 390 :
+            y2 = 390
                      
         # player1의 눈이 충돌했을 경우 
         if len(sb1_xy) != 0:
