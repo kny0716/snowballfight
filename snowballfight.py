@@ -465,13 +465,13 @@ def runGame():
 
         if y1 <0 : # player1이 화면 바깥으로 나가지 못하게 함 
             y1 = 0
-        elif y1 > 390 :
-            y1 = 390
+        elif y1 > 400 :
+            y1 = 400
 
         if y2 <0 : # player2이 화면 바깥으로 나가지 못하게 함 
             y2 = 0
-        elif y2 > 390 :
-            y2 = 390
+        elif y2 > 400 :
+            y2 = 400
                      
         # player1의 눈이 충돌했을 경우 
         if len(sb1_xy) != 0:
