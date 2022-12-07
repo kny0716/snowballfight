@@ -292,7 +292,7 @@ def stat():
                         stat_snspeed2 = stat_snspeed2 - 1
                         stat2 = stat2 + 1
                 # 게임 시작 버튼 클릭
-                if (btst_xy[0] + btst_width  > mouse[0]) and (mouse[0] > btst_xy[0] +100 ) and (btst_xy[1] + bt_height > mouse[1] ) and (mouse[1] > btst_xy[1]):
+                if (btst_xy[0] + btst_width - 10 > mouse[0]) and (mouse[0] > btst_xy[0] + 10 ) and (btst_xy[1] + bt_height + 20 > mouse[1] ) and (mouse[1] > btst_xy[1] + 20):
                     p1_speed = p1_speed + 0.5 * stat_speed1
                     p2_speed = p2_speed + 0.5 * stat_speed2
                     snowmax_1 = snowmax_1 + stat_snowmax1
