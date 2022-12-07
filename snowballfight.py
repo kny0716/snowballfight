@@ -395,6 +395,8 @@ def runGame():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                pygame.quit()
+                sys.exit()
             
             if event.type == itemtime: # 5초마다 아이템 생성
                 if len(item) == 0 : # 생성되어 있는 아이템이 없어야 아이템 생성
